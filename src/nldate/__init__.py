@@ -15,6 +15,22 @@ _WEEKDAYS = {
 }
 
 _MONTHS = {name.lower(): month for month, name in enumerate(month_name) if name}
+_MONTHS.update(
+    {
+        "jan": 1,
+        "feb": 2,
+        "mar": 3,
+        "apr": 4,
+        "jun": 6,
+        "jul": 7,
+        "aug": 8,
+        "sep": 9,
+        "sept": 9,
+        "oct": 10,
+        "nov": 11,
+        "dec": 12,
+    }
+)
 
 
 def _normalize(text: str) -> str:
