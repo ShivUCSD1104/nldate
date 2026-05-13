@@ -137,7 +137,7 @@ def _shift_weekday(reference: date, target_weekday: int, direction: int) -> date
 
 def _parse_duration(text: str) -> list[tuple[int, str]]:
     number_pattern = (
-        r"\d+|zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|"
+        r"\d+|a|an|zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|"
         r"twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|"
         r"nineteen|twenty|thirty|twenty one|twenty two|twenty three|"
         r"twenty four|twenty five|twenty six|twenty seven|twenty eight|"
