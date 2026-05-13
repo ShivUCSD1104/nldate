@@ -108,11 +108,29 @@ def parse(s: str, today: date | None = None) -> date:
             direction = 1 if direction_str == "next" else -1
             return _shift_weekday(today, _WEEKDAYS[weekday_str], direction)
 
-    if match := re.fullmatch(r"(\d+) days ago", text):
-        return today - timedelta(days=int(match.group(1)))
+    if match := re.fullmatch(r"(\d+) (days?|weeks?|years?) ago", text):
+        amount_str, unit = match.groups()
+        amount = int(amount_str)
 
-    if match := re.fullmatch(r"in (\d+) days", text):
-        return today + timedelta(days=int(match.group(1)))
+        if unit.startswith("day"):
+            return today - timedelta(days=amount)
+
+        if unit.startswith("week"):
+            return today - timedelta(weeks=amount)
+
+        return _add_years(today, -amount)
+
+    if match := re.fullmatch(r"in (\d+) (days?|weeks?|years?)", text):
+        amount_str, unit = match.groups()
+        amount = int(amount_str)
+
+        if unit.startswith("day"):
+            return today + timedelta(days=amount)
+
+        if unit.startswith("week"):
+            return today + timedelta(weeks=amount)
+
+        return _add_years(today, amount)
 
     if match := re.fullmatch(
         r"(\d+) (day|days|year|years) (before|after) (.+)",
