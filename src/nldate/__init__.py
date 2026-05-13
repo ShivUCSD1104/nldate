@@ -35,7 +35,7 @@ _MONTHS.update(
 
 def _normalize(text: str) -> str:
     text = text.strip().lower()
-    text = text.replace(",", "")
+    text = text.replace(",", "").replace(".", "")
     return re.sub(r"\s+", " ", text)
 
 
